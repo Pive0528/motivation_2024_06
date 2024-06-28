@@ -37,10 +37,6 @@ public class Motivation {
 
     @Override
     public String toString() {
-        return "Motivation{" +
-                "id=" + id +
-                ", body='" + body + '\'' +
-                ", source='" + source + '\'' +
-                '}';
+        return id + " " + body + " " + source ;
     }
 }
