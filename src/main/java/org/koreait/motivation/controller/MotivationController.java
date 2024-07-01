@@ -1,6 +1,7 @@
 package org.koreait.motivation.controller;
 
 import org.koreait.Container;
+import org.koreait.Rq;
 import org.koreait.motivation.entity.Motivation;
 
 import java.util.ArrayList;
@@ -52,7 +53,67 @@ public class MotivationController {
         }
     }
 
-    public void delete(String cmd) {
+    public void delete(Rq rq) {
 
+        int id;
+
+        try {
+            id = Integer.parseInt(rq.getParams("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("정수 입력 오류");
+            return;
+        }
+
+        Motivation motivation = findById(id);
+
+        if (motivation == null) {
+            System.out.printf("%d번 motivation은 없습니다\n", id);
+            return;
+        }
+        System.out.println("delete 실행");
+        motivations.remove(motivation);
+        System.out.printf("%d번 motivation을 삭제했습니다\n", id);
+    }
+
+    public void edit(Rq rq) {
+
+        int id;
+
+        try {
+            id = Integer.parseInt(rq.getParams("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("정수 입력 오류");
+            return;
+        }
+
+        Motivation motivation = findById(id);
+
+        if (motivation == null) {
+            System.out.printf("%d번 motivation은 없습니다\n", id);
+            return;
+        }
+
+        System.out.println("body(기존) : " + motivation.getBody());
+        System.out.println("source(기존) : " + motivation.getSource());
+
+        System.out.print("body수정 : ");
+        String body = Container.getScanner().nextLine();
+        System.out.print("source수정 : ");
+        String source = Container.getScanner().nextLine();
+
+        motivation.setBody(body);
+        motivation.setSource(source);
+
+        System.out.printf("%d번 motivation을 수정했습니다\n", id);
+    }
+
+
+    private Motivation findById(int id) {
+        for (Motivation motivation : motivations) {
+            if (motivation.getId() == id) {
+                return motivation;
+            }
+        }
+        return null;
     }
 }
