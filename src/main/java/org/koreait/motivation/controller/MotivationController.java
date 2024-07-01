@@ -17,6 +17,7 @@ public class MotivationController {
         motivations = new ArrayList<>();
     }
 
+
     public void add() {
         int id = lastId + 1;
         System.out.print("body : ");
