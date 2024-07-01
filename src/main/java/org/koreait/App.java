@@ -32,7 +32,7 @@ public class App {
             switch (rq.getActionMethod()) {
                 case "exit":
                     systemController.exit();
-                    system_status = 0;
+                    system_status = 0;      // 실질적 종료기능.
                     break;
                 case "add":
                     motivationController.add();
@@ -43,10 +43,9 @@ public class App {
                 case "delete":  // ex)delete?id=2
                     motivationController.delete(rq);
                     break;
-                case "edit":  // ex)delete?id=2
+                case "edit":  // ex)edit?id=2
                     motivationController.edit(rq);
                     break;
-
 
                 default:
                     System.out.println("사용할 수 없는 명령어입니다");
